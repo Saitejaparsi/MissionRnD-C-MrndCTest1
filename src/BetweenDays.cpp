@@ -29,7 +29,7 @@ struct node{
 };
 
 
-int between_days(struct node *date1head, struct node *date2head){
+int dates(struct node *date1head, struct node *date2head){
 
 	int date1 = 0, month1 = 0, year1 = 0, i = 0, date2 = 0, month2 = 0, year2 = 0, j = 0, mondays1 = 0, nodays = 0, yearsbetwen = 0, daysbe = 0;
 	int days[13] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
@@ -79,62 +79,62 @@ int between_days(struct node *date1head, struct node *date2head){
 			}
 			if (date1 > date2)
 			{
-				nodays = mondays1 + date - date2 - 1;
+				nodays = mondays1 + date1 - date2 - 1;
 			}
 			else
 			{
-				nodays = mondays1 + date2 - date - 1;
+				nodays = mondays1 + date2 - date1 - 1;
 			}
 		}
 		else
 		{
-			for (j = month; j < month2; j++)
+			for (j = month1; j < month2; j++)
 			{
 				mondays1 = mondays1 + days[j];
 			}
-			if (date > date2)
+			if (date1 > date2)
 			{
-				nodays = mondays1 + date - date2;
+				nodays = mondays1 + date1 - date2;
 			}
 			else
 			{
-				nodays = mondays1 + date2 - date;
+				nodays = mondays1 + date2 - date1;
 			}
 		}
 		nodays = nodays - 1;
 	}
 	else{
-		yearsbetwen = year2 - year;
+		yearsbetwen = year2 - year1;
 		if (yearsbetwen == 1)
 		{
-			for (j = month; j < 12; j++)
+			for (j = month1; j < 12; j++)
 			{
 				daysbe = daysbe + days[j];
 			}
-			daysbe = daysbe - date - 1;
+			daysbe = daysbe - date1 - 1;
 			for (j = 1; j < month2; j++)
 			{
 				daysbe = daysbe + days[j];
 			}
 			daysbe = daysbe + date2 - 1;
-			if (date2 > date)
-				nodays = daysbe + date2 - date;
+			if (date2 > date1)
+				nodays = daysbe + date2 - date1;
 			else
-				nodays = daysbe + date - date2;
+				nodays = daysbe + date1 - date2;
 		}
 		else
 		{
-			for (j = month; j < 12; j++)
+			for (j = month1; j < 12; j++)
 			{
 				daysbe = daysbe + days[j];
 			}
-			daysbe = daysbe - date - 1;
+			daysbe = daysbe - date1 - 1;
 			for (j = 1; j < month2; j++)
 			{
 				daysbe = daysbe + days[j];
 			}
 			daysbe = daysbe + date2;
-			nodays = daysbe + date - date2;
+			nodays = daysbe + date1- date2;
 			yearsbetwen = (yearsbetwen - 1) * 365;
 			nodays = nodays + yearsbetwen;
 		}
