@@ -30,5 +30,124 @@ struct node{
 
 
 int between_days(struct node *date1head, struct node *date2head){
-	return -1;
+
+	int date1 = 0, month1 = 0, year1 = 0, i = 0, date2 = 0, month2 = 0, year2 = 0, j = 0, mondays1 = 0, nodays = 0, yearsbetwen = 0, daysbe = 0;
+	int days[13] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	int daysl[13] = { 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	while (date1head != NULL)
+	{
+		if (i < 2)
+		{
+			date1 = date1 * 10 + date1head->data;
+		}
+		else if (i > 1 && i < 4)
+		{
+			month1 = month1* 10 + date1head->data;
+		}
+		else if (i>3 && i < 8)
+		{
+			year1 = year1 * 10 + date1head->data;
+		}
+		date1head = date1head->next;
+		i++;
+	}
+	i = 0;
+	while (date2head != NULL)
+	{
+		if (i < 2)
+		{
+			date2 = date2 * 10 + date2head->data;
+		}
+		else if (i > 1 && i < 4)
+		{
+			month2 = month2 * 10 + date2head->data;
+		}
+		else if (i>3 && i < 8)
+		{
+			year2 = year2 * 10 + date2head->data;
+		}
+		date2head = date2head->next;
+		i++;
+	}
+	if (year1 == year2)
+	{
+		if (month1 > month2)
+		{
+			for (j = month2; j < month1; j++)
+			{
+				mondays1 = mondays1 + days[j];
+			}
+			if (date1 > date2)
+			{
+				nodays = mondays1 + date - date2 - 1;
+			}
+			else
+			{
+				nodays = mondays1 + date2 - date - 1;
+			}
+		}
+		else
+		{
+			for (j = month; j < month2; j++)
+			{
+				mondays1 = mondays1 + days[j];
+			}
+			if (date > date2)
+			{
+				nodays = mondays1 + date - date2;
+			}
+			else
+			{
+				nodays = mondays1 + date2 - date;
+			}
+		}
+		nodays = nodays - 1;
+	}
+	else{
+		yearsbetwen = year2 - year;
+		if (yearsbetwen == 1)
+		{
+			for (j = month; j < 12; j++)
+			{
+				daysbe = daysbe + days[j];
+			}
+			daysbe = daysbe - date - 1;
+			for (j = 1; j < month2; j++)
+			{
+				daysbe = daysbe + days[j];
+			}
+			daysbe = daysbe + date2 - 1;
+			if (date2 > date)
+				nodays = daysbe + date2 - date;
+			else
+				nodays = daysbe + date - date2;
+		}
+		else
+		{
+			for (j = month; j < 12; j++)
+			{
+				daysbe = daysbe + days[j];
+			}
+			daysbe = daysbe - date - 1;
+			for (j = 1; j < month2; j++)
+			{
+				daysbe = daysbe + days[j];
+			}
+			daysbe = daysbe + date2;
+			nodays = daysbe + date - date2;
+			yearsbetwen = (yearsbetwen - 1) * 365;
+			nodays = nodays + yearsbetwen;
+		}
+
+	}
+	return nodays;
+}
+int between_days(struct node *date1head, struct node *date2head){
+	if (date1head == NULL&&date2head == NULL)
+		return -1;
+	else{
+		int i = 0;
+		i = dates(date1head, date2head);
+		return i;
+	}
 }

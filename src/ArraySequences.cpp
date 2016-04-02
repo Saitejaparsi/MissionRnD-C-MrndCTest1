@@ -52,7 +52,15 @@ int * find_sequences(int *arr, int len){
 						break;
 					}
 				}
+				if (i + 2>len)
+					arr[5] = len;
 			}
+			/*d1 = arr[j + 1] - arr[j];
+			if (d1 != arr[i + 1] - arr[i])
+				j = j + 1;
+			r = arr[j + 1] / arr[j];
+			if (r != arr[i + 1] / arr[i])
+				j = j + 1;*/
 			r = arr[j + 1] / arr[j];
 			if (r == arr[j + 2] / arr[j + 1]){
 				m[4] = i;
@@ -65,6 +73,8 @@ int * find_sequences(int *arr, int len){
 						m[5] = i;
 						break;
 					}
+					if (i + 2>len)
+						arr[5] = len;
 				}
 			}
 		}
