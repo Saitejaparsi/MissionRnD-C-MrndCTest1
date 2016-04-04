@@ -31,7 +31,7 @@ struct node{
 
 int dates(struct node *date1head, struct node *date2head){
 
-	int date1 = 0, month1 = 0, year1 = 0, i = 0, date2 = 0, month2 = 0, year2 = 0, j = 0, mondays1 = 0, nodays = 0, yearsbetwen = 0, daysbe = 0;
+	int date1 = 0, month1 = 0, year1 = 0, i = 0, date2 = 0, month2 = 0, year2 = 0, j = 0, mon = 0, nodays = 0, years = 0, daysbe = 0;
 	int days[13] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 	int daysl[13] = { 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 	while (date1head != NULL)
@@ -75,37 +75,37 @@ int dates(struct node *date1head, struct node *date2head){
 		{
 			for (j = month2; j < month1; j++)
 			{
-				mondays1 = mondays1 + days[j];
+				mon = mon+ days[j];
 			}
 			if (date1 > date2)
 			{
-				nodays = mondays1 + date1 - date2 - 1;
+				nodays = mon + date1 - date2 - 1;
 			}
 			else
 			{
-				nodays = mondays1 + date2 - date1 - 1;
+				nodays = mon + date2 - date1 - 1;
 			}
 		}
 		else
 		{
 			for (j = month1; j < month2; j++)
 			{
-				mondays1 = mondays1 + days[j];
+				mon= mon + days[j];
 			}
 			if (date1 > date2)
 			{
-				nodays = mondays1 + date1 - date2;
+				nodays = mon + date1 - date2;
 			}
 			else
 			{
-				nodays = mondays1 + date2 - date1;
+				nodays = mon + date2 - date1;
 			}
 		}
 		nodays = nodays - 1;
 	}
 	else{
-		yearsbetwen = year2 - year1;
-		if (yearsbetwen == 1)
+		years = year2 - year1;
+		if (years == 1)
 		{
 			for (j = month1; j < 12; j++)
 			{
@@ -135,8 +135,8 @@ int dates(struct node *date1head, struct node *date2head){
 			}
 			daysbe = daysbe + date2;
 			nodays = daysbe + date1- date2;
-			yearsbetwen = (yearsbetwen - 1) * 365;
-			nodays = nodays + yearsbetwen;
+			years = (years - 1) * 365;
+			nodays = nodays + years;
 		}
 
 	}
