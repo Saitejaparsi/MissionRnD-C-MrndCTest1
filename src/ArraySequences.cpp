@@ -30,14 +30,13 @@ Difficulty : Medium
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-#include <malloc.h>
-
 int * find_sequences(int *arr, int len){
 	if(len<6)
 		return NULL;
 	else
 	{
-		int d1 = 0, r = 0, i = 0, j = 0, k=-1,m[6];
+		int d1 = 0, r = 0, i = 0, j = 0, k=-1,*m,count=0;
+		m = (int *)malloc(6 * sizeof(int));
 		for(i = 0; i < len; i++)
 		{
 			d1 = arr[j + 1] - arr[j];
@@ -45,39 +44,41 @@ int * find_sequences(int *arr, int len){
 				for (; i < len; i++){
 					if (d1 != arr[i + 1] - arr[i]){
 						k++;
-						m[k] = j;
+						*(m+k) = j;
+						count = 1;
 						j = i+1;
 						k++;
-						m[k] = i;
+						*(m + k) = i;
 						break;
 					}
 				}
 				if (i + 2>len)
-					arr[5] = len;
+					*(m + k) = len - 1;
 			}
-			/*d1 = arr[j + 1] - arr[j];
-			if (d1 != arr[i + 1] - arr[i])
-				j = j + 1;
-			r = arr[j + 1] / arr[j];
-			if (r != arr[i + 1] / arr[i])
-				j = j + 1;*/
-			r = arr[j + 1] / arr[j];
-			if (r == arr[j + 2] / arr[j + 1]){
-				m[4] = i;
-				for (; i < len; i++)
-				{
-					if (r != arr[i + 2] / arr[i + 1])
+			else{
+				r = arr[j + 1] / arr[j];
+				if (count == 1 && r == arr[j] / arr[j - 1])
+					*(m+4) = i - 1;
+				else
+					*(m+4) = i;
+				if (i + 2 > len - 1){
+					*(m+5) = i + 1;
+					break;
+				}
+				else if (r == arr[i+ 2] / arr[i+ 1]){
+					for (; i < len; i++)
 					{
-						j = i+1;
-						k++;
-						m[5] = i;
-						break;
+						if (r != arr[i + 2] / arr[i + 1])
+						{
+							j = i + 1;
+							k++;
+							*(m+5) = i;
+							break;
+						}
 					}
-					if (i + 2>len)
-						arr[5] = len;
 				}
 			}
 		}
+		return m;
 	}
-
 }
